@@ -23,17 +23,20 @@ function template(title, content) {
 
 
 
-  function index(result) {
-    `
-  <li>
-    <a href="${result.filename}">${result.title}</a>
-  </li>`
+  function index(results) {
+    const list = results?.map(
+      (result) => `
+<li>
+  <a href="${result.filename}">${result.title}</a>
+</li>`
+    )
+    .join('\n');
 
-    return `<section>
-    <h1>Okkar eigin kennsluskrá</h1>
-    <ul></ul>
-  </section>`;
-  }
+  return `<section>
+  <h1>Gagnavinnsla</h1>
+  <ul>${list}</ul>
+</section>`;
+}
 
   export function indexTemplate(results) {
     return template('Skilaverkefni 1', index(results));

@@ -47,7 +47,7 @@ async function main() {
 
   // býr til index.html
   const filepath = join(OUTPUT_DIR, 'index.html');
-  const template = indexTemplate();
+  const template = indexTemplate(results);
 
   await writeFile(filepath, template, { flag: 'w+' });
 }
