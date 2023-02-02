@@ -26,7 +26,6 @@ async function main() {
     const file = csv.slice(0, csv.indexOf('.'));
     const filename = `${file}.html`;
 
-
     const result = {
       title,
       description,
@@ -39,7 +38,6 @@ async function main() {
     const filepath = join(OUTPUT_DIR, filename);
     const template = pagesTemplate(title, result);
 
-    // eslint-disable-next-line no-await-in-loop
     await writeFile(filepath, template, { flag: 'w+' });
 
   }

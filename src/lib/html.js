@@ -14,9 +14,8 @@ function template(title, content) {
   export function pages(result) {
 
     return `<article>
-    <h2>Þetta skjal er ${result.title}</h2>
-    <section>
-    </section>
+    <h2>${result.title}</h2>
+      <p>${result.description}</p>
     <p><a href="/">Til baka</a></p>
   </article>`;
   }
@@ -33,13 +32,13 @@ function template(title, content) {
     .join('\n');
 
   return `<section>
-  <h1>Gagnavinnsla</h1>
+  <h1>Okkar eigin kennsluskrá</h1>
   <ul>${list}</ul>
 </section>`;
 }
 
   export function indexTemplate(results) {
-    return template('Skilaverkefni 1', index(results));
+    return template('Kennsluskrá', index(results));
   }
 
   export function pagesTemplate(title, result) {
