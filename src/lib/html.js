@@ -16,25 +16,22 @@ function template(title, content) {
     return `<article>
     <h2>Þetta skjal er ${result.title}</h2>
     <section>
-
     </section>
     <p><a href="/">Til baka</a></p>
   </article>`;
   }
 
-  function index(results) {
-    const list = results
-      .map(
-        (result) => `
+
+
+  function index(result) {
+    `
   <li>
     <a href="${result.filename}">${result.title}</a>
   </li>`
-      )
-      .join('\n');
 
     return `<section>
     <h1>Okkar eigin kennsluskrá</h1>
-    <ul>${list}</ul>
+    <ul></ul>
   </section>`;
   }
 

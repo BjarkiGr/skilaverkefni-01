@@ -1,7 +1,8 @@
 export function parse(input) {
-  content = JSON.parse(input)
-   console.log(content.title)
-   console.log(content.description)
-   return content
-  }
-  
+  const fs = require('fs');
+
+  fs.readFile('./data/islenska.csv', 'utf8', function (err, data) {
+    console.log(data);
+  });
+
+}

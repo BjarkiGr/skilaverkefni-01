@@ -1,46 +1,53 @@
 import { mkdir, writeFile } from 'fs/promises';
-import path, { join } from 'path';
-import { direxists, readFile, readFilesFromDir } from './lib/file.js';
+import { join } from 'path';
+import { direxists, readFile } from './lib/file.js';
 import { indexTemplate, pagesTemplate } from './lib/html.js';
 
-const DATA_DIR = './data';
+const DATA_DIR = './data/';
 const OUTPUT_DIR = './dist';
+const INDEX = './data/index.json';
 
 async function main() {
-  // Búa til `./dist` ef ekki til
+
+  // býr til dist möppu ef hún er ekki til
   if (!(await direxists(OUTPUT_DIR))) {
     await mkdir(OUTPUT_DIR);
   }
 
-  const dataFiles = await readFilesFromDir(DATA_DIR);
   const results = [];
 
+  const rawdata = await readFile(INDEX);
+  let JSONdata = JSON.parse(rawdata);
 
-  for (const file of dataFiles) {
-    // eslint-disable-next-line no-await-in-loop
-    const content = await readFile(file);
+  for (const data of JSONdata) {
+    const title = data.title;
+    const description = data.description;
+    const csv = data.csv;
+    const file = csv.slice(0, csv.indexOf('.'));
+    const filename = `${file}.html`;
 
-    if (content) {
-      const title = path.basename(file, '.csv');
-      const filename = `${title}.html`;
 
-      const result = {
-        title,
-        filename,
-      };
-
-      results.push(result);
-
-      const filepath = join(OUTPUT_DIR, filename);
-      const template = pagesTemplate(title, result);
-
-      // eslint-disable-next-line no-await-in-loop
-      await writeFile(filepath, template, { flag: 'w+' });
+    const result = {
+      title,
+      description,
+      csv,
+      filename
     }
+
+    results.push(result);
+
+    const filepath = join(OUTPUT_DIR, filename);
+    const template = pagesTemplate(title, result);
+
+    // eslint-disable-next-line no-await-in-loop
+    await writeFile(filepath, template, { flag: 'w+' });
+
   }
 
+
+  // býr til index.html
   const filepath = join(OUTPUT_DIR, 'index.html');
-  const template = indexTemplate(results);
+  const template = indexTemplate();
 
   await writeFile(filepath, template, { flag: 'w+' });
 }
