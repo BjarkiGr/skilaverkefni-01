@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "browser-sync": "^2.27.5",
+    "concurrently": "^7.6.0",
+    "cpy-cli": "^4.2.0",
+    "eslint": "^8.32.0",
+    "jest": "^29.4.1",
+    "stylelint": "^14.16.1"
+  },
+  "name": "skilaverkefni-01",
+  "description": "[Kynning í fyrirlestri](https://youtu.be/Mjrug2-LGfk).",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "node ./src/build.js && cpy public dist",
+    "test": "NODE_OPTIONS='--experimental-vm-modules' jest ./*.test.js",
+    "coverage": "NODE_OPTIONS='--experimental-vm-modules' jest --coverage --collectCoverageFrom=\"./src/**/*.js\"",
+    "dev": "browser-sync start --serveStatic ./dist --server --files ./public/styles.css ./dist/*.html",
+    "prettier": "prettier --write .",
+    "lint": "concurrently npm:lint:*",
+    "lint:eslint": "eslint ./src/**/*.js",
+    "lint:stylelint": "stylelint ./public/styles.css"
+  },
+  "author": "",
+  "license": "ISC"
+}
