@@ -12,32 +12,20 @@ function template(title, content) {
 
 
   export function pages(result, csvResults) {
-    `<table>`
-    const listing = csvResults?.map(
+    const list = csvResults?.map(
       (csvResult) => `
-  <tr>
-    <td>${csvResult.numer}</td>
-    <td>${csvResult.heiti}</td>
-    <td>${csvResult.einingar}</td>
-    <td>${csvResult.kennslumisseri}</td>
-    <td>${csvResult.namsstig}</td>
-  </tr>
-  `
-    )
-    .join('\n');
-    `</table>
-    <article>
-    <h2>${result.title}</h2>
-      <p>${result.description}</p>
-    <p><a href="/">Til baka</a></p>
-  </article>`;
+  <p class="table-item">${csvResult.numer} ${csvResult.heiti} ${csvResult.einingar} ${csvResult.kennslumisseri} ${csvResult.namsstig}</p>`
+    );
 
-return `<section>
-<h1>Okkar eigin kennsluskrá</h1>
-<ul>${listing}</ul>
-</section>`;
+    return `
+    <h1>${result.title}</h1>
+    <div class="table">
+    ${list}
+    </div>
+  `;
 
   }
+
 
 
 
