@@ -4,7 +4,6 @@ import { direxists, readFile } from './lib/file.js';
 import { indexTemplate, pagesTemplate } from './lib/html.js';
 import { parseCSV } from './lib/parser.js';
 
-const DATA_DIR = './data/';
 const OUTPUT_DIR = './dist';
 const INDEX = './data/index.json';
 
