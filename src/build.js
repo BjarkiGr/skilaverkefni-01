@@ -2,6 +2,7 @@ import { mkdir, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { direxists, readFile } from './lib/file.js';
 import { indexTemplate, pagesTemplate } from './lib/html.js';
+import { parseCSV } from './lib/parser.js';
 
 const DATA_DIR = './data/';
 const OUTPUT_DIR = './dist';
@@ -16,8 +17,8 @@ async function main() {
 
   const results = [];
 
-  const rawdata = await readFile(INDEX);
-  let JSONdata = JSON.parse(rawdata);
+  const rawJSON = await readFile(INDEX);
+  let JSONdata = JSON.parse(rawJSON);
 
   for (const data of JSONdata) {
     const title = data.title;
@@ -26,6 +27,31 @@ async function main() {
     const file = csv.slice(0, csv.indexOf('.'));
     const filename = `${file}.html`;
 
+    let csvData = await readFile('./data/'+csv, { encoding: 'latin1' });
+    let parsedCSV = parseCSV(csvData)
+
+    const csvResults = []
+
+    // Setur csv data í sér array
+    for(let i = 0; i < parsedCSV.length; i++) {
+
+      const numer = parsedCSV[i][0];
+      const heiti = parsedCSV[i][1];
+      const einingar = parsedCSV[i][2];
+      const kennslumisseri = parsedCSV[i][3];
+      const namsstig = parsedCSV[i][4];
+
+      const csvResult = {
+        numer,
+        heiti,
+        einingar,
+        kennslumisseri,
+        namsstig
+      }
+      csvResults.push(csvResult);
+    }
+
+
     const result = {
       title,
       description,
@@ -33,10 +59,11 @@ async function main() {
       filename
     }
 
+
     results.push(result);
 
     const filepath = join(OUTPUT_DIR, filename);
-    const template = pagesTemplate(title, result);
+    const template = pagesTemplate(title, result, csvResults);
 
     await writeFile(filepath, template, { flag: 'w+' });
 

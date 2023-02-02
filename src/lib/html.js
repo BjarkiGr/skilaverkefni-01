@@ -11,13 +11,32 @@ function template(title, content) {
   }
 
 
-  export function pages(result) {
-
-    return `<article>
+  export function pages(result, csvResults) {
+    `<table>`
+    const listing = csvResults?.map(
+      (csvResult) => `
+  <tr>
+    <td>${csvResult.numer}</td>
+    <td>${csvResult.heiti}</td>
+    <td>${csvResult.einingar}</td>
+    <td>${csvResult.kennslumisseri}</td>
+    <td>${csvResult.namsstig}</td>
+  </tr>
+  `
+    )
+    .join('\n');
+    `</table>
+    <article>
     <h2>${result.title}</h2>
       <p>${result.description}</p>
     <p><a href="/">Til baka</a></p>
   </article>`;
+
+return `<section>
+<h1>Okkar eigin kennsluskrá</h1>
+<ul>${listing}</ul>
+</section>`;
+
   }
 
 
@@ -41,6 +60,6 @@ function template(title, content) {
     return template('Kennsluskrá', index(results));
   }
 
-  export function pagesTemplate(title, result) {
-    return template(title, pages(result));
+  export function pagesTemplate(title, result, csvResults) {
+    return template(title, pages(result, csvResults));
   }

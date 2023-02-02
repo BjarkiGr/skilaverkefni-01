@@ -1,8 +1,15 @@
-export function parse(input) {
-  const fs = require('fs');
 
-  fs.readFile('./data/islenska.csv', 'utf8', function (err, data) {
-    console.log(data);
+
+
+export function parseCSV(input) {
+
+  let parsedData = []
+
+  if(input != null) {
+    parsedData = input.split("\n").map(function (line) {
+      return line.split(";");
   });
 
+  }
+  return parsedData;
 }
