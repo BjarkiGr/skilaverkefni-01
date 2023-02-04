@@ -74,3 +74,39 @@ html {
     width: 100%;
     text-align: center;
   }
+
+
+  td {
+    text-align: center;
+    padding: 10px;
+    border: 1px solid black;
+  }
+
+
+  tr {
+    width: 100%;
+  }
+
+
+  .table-item-link {
+    text-decoration: none;
+    color: #444554;
+  }
+
+  .table-item-link:visited {
+    text-decoration: none;
+    color: #444554;
+  }
+
+  button {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #b8a3ac;
+    margin: 5px;
+    text-align: center;
+  }
+
+  button:hover {
+      background-color: #957584;
+    }

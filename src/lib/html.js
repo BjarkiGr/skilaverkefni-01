@@ -12,19 +12,23 @@ function template(title, content) {
 
 
   export function pages(result, csvResults) {
-    const list = csvResults?.map(
-      (csvResult) => `
-  <a class="table-item-link" href="${csvResult.link}">
-  <p class="table-item">${csvResult.numer} | ${csvResult.heiti} | ${csvResult.einingar} | ${csvResult.kennslumisseri} | ${csvResult.namsstig}</p>
-  </a>`
+    const list = csvResults.map(
+      (csvResult) => `<tr>
+      <td>${csvResult.numer}</td>
+      <td><a class="table-item-link" href="${csvResult.link}">${csvResult.heiti}</a></td>
+      <td>${csvResult.einingar}</td>
+      <td>${csvResult.kennslumisseri}</td>
+      <td>${csvResult.namsstig}</td>
+      </tr>`
    );
 
     return `
     <h1 class="title">${result.title}</h1>
     <p class="description">${result.description}</p>
-    <div class="table">
+    <table>
     ${list}
-    </div>
+    </table>
+    <a class="button-content" href="/"><button>Til baka</button></a>
   `;
 
   }
