@@ -32,20 +32,22 @@ async function main() {
     const csvResults = []
 
     // Setur csv data í sér array
-    for(let i = 0; i < parsedCSV.length; i++) {
+    for(let i = 0; i < (parsedCSV.length)-1; i++) {
 
       const numer = parsedCSV[i][0];
       const heiti = parsedCSV[i][1];
       const einingar = parsedCSV[i][2];
       const kennslumisseri = parsedCSV[i][3];
       const namsstig = parsedCSV[i][4];
+      const link = parsedCSV[i][5];
 
       const csvResult = {
         numer,
         heiti,
         einingar,
         kennslumisseri,
-        namsstig
+        namsstig,
+        link
       }
       csvResults.push(csvResult);
     }

@@ -14,11 +14,14 @@ function template(title, content) {
   export function pages(result, csvResults) {
     const list = csvResults?.map(
       (csvResult) => `
-  <p class="table-item">${csvResult.numer} ${csvResult.heiti} ${csvResult.einingar} ${csvResult.kennslumisseri} ${csvResult.namsstig}</p>`
-    );
+  <a class="table-item-link" href="${csvResult.link}">
+  <p class="table-item">${csvResult.numer} | ${csvResult.heiti} | ${csvResult.einingar} | ${csvResult.kennslumisseri} | ${csvResult.namsstig}</p>
+  </a>`
+   );
 
     return `
-    <h1>${result.title}</h1>
+    <h1 class="title">${result.title}</h1>
+    <p class="description">${result.description}</p>
     <div class="table">
     ${list}
     </div>
@@ -32,16 +35,14 @@ function template(title, content) {
   function index(results) {
     const list = results?.map(
       (result) => `
-<li>
-  <a href="${result.filename}">${result.title}</a>
-</li>`
+      <a class="list-item-link" href="${result.filename}"><li class="list-item">${result.title}</li></a>`
     )
     .join('\n');
 
-  return `<section>
-  <h1>Okkar eigin kennsluskrá</h1>
-  <ul>${list}</ul>
-</section>`;
+  return `
+  <h1 class="title">Okkar eigin kennsluskrá</h1>
+  <ul class="list">${list}</ul>
+`;
 }
 
   export function indexTemplate(results) {
