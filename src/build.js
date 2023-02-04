@@ -50,7 +50,6 @@ async function main() {
         link
       }
       csvResults.push(csvResult);
-      console.log(csvResult)
     }
 
 
